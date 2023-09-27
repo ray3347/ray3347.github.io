@@ -4,15 +4,24 @@ import { motion } from "framer-motion";
 import HomeBanner from "../../components/home_banner/HomeBanner";
 import ProjectsBanner from "../../components/projects_banner/ProjectsBanner";
 import AboutBanner from "../../components/about_banner/AboutBanner";
+import { Outlet } from "react-router-dom";
 
 function Home() {
   return (
-    <motion.div layout>
-      <Navbar />
+    <motion.div layout style={{
+      backgroundColor: "black",
+      height: "100vh",
+    }}>
+      <Stack sx={{
+        top: "0"
+      }}>
+        <Navbar />
+      </Stack>
+      
       <Stack>
         <HomeBanner/>
         <ProjectsBanner/>
-        <AboutBanner/>
+        {/* <AboutBanner/> */}
       </Stack>
     </motion.div>
   );

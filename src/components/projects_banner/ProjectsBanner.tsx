@@ -16,14 +16,15 @@ import { Canvas } from "@react-three/fiber";
 import { useSmoothTransform } from "../main-button/useSmoothTransform";
 import { motion as motion3d } from "framer-motion-3d";
 import Canvas3D from "../3d/Canvas3D";
-import Card from "./Card";
+import Card from "../card/Card";
+import CardContent from "./CardContent";
 
 function ProjectsBanner() {
   const ref = useRef(null);
   const scroll = useScroll({
     target: ref,
   });
-  const parallax = useTransform(scroll.scrollYProgress, [1, 0], [0.7, 1]);
+  const parallax = useTransform(scroll.scrollYProgress, [1, 0], [0.85, 1]);
 
   useEffect(() => {
     // console.log(parallax);
@@ -36,10 +37,13 @@ function ProjectsBanner() {
         style={{
           backgroundSize: "cover",
           backgroundPosition: "50% 0%",
-          padding: "5em",
+          paddingLeft: "5vw",
+          paddingRight: "5vw",
+          paddingTop: "2vw",
+          paddingBottom: "2vw",
         }}
       >
-        <Card ref={ref} scaleChange={parallax} />
+        <Card content={<CardContent/>} ref={ref} scaleChange={parallax} />
       </motion.div>
     </Stack>
   );

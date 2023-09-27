@@ -2,6 +2,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { MotionValue, motion, useWillChange } from "framer-motion";
 import "../../index.css";
 import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -9,6 +10,10 @@ function Navbar() {
       className="w-full"
       sx={{
         margin: "auto",
+        position: "sticky",
+        top: 0,
+        backgroundColor: "black",
+        zIndex: 3,
       }}
     >
       <Stack
@@ -21,12 +26,16 @@ function Navbar() {
           width: "100%",
         }}
       >
-        <motion.div
-          exit={{ y: 5 }}
-          whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
-        >
-          <span style={{ color: "white", fontWeight: "bold" }}>Home</span>
-        </motion.div>
+        <Link to="/">
+          <motion.div
+            exit={{ y: 5 }}
+            whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
+          >
+            {/* <Outlet/> */}
+            <span style={{ color: "white", fontWeight: "bold" }}>Home</span>
+          </motion.div>
+        </Link>
+
         {/* <Stack
           sx={{
             width: "5em",
@@ -34,12 +43,15 @@ function Navbar() {
         >
           <Button>Projects</Button>
         </Stack> */}
-        <motion.div
-          exit={{ y: 5 }}
-          whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
-        >
-          <span style={{ color: "white", fontWeight: "bold" }}>Projects</span>
-        </motion.div>
+        <Link to="/projects">
+          <motion.div
+            exit={{ y: 5 }}
+            whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
+          >
+            <span style={{ color: "white", fontWeight: "bold" }}>Projects</span>
+          </motion.div>
+        </Link>
+
         {/* <Stack
           sx={
             {
@@ -49,12 +61,14 @@ function Navbar() {
         >
           <Button>About Author</Button>
         </Stack> */}
-        <motion.div
-          exit={{ y: 5 }}
-          whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
-        >
-          <span style={{ color: "white", fontWeight: "bold" }}>About Me</span>
-        </motion.div>
+        <Link to="/about-me">
+          <motion.div
+            exit={{ y: 5 }}
+            whileHover={{ scale: 1.1, y: -5, opacity: 1, cursor: "pointer" }}
+          >
+            <span style={{ color: "white", fontWeight: "bold" }}>About Me</span>
+          </motion.div>
+        </Link>
       </Stack>
       <motion.div
         className="bg-glowNavbar w-full bg-repeat-x h-1 overflow-hidden"
