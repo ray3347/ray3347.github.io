@@ -8,10 +8,14 @@ export interface IContentData{
     title: string;
     description: string;
     url:string;
-    image: string;
 }
 
 export interface IContentProps{
     data: IContentData[];
     activeIndex? : any;
+}
+
+export interface IContentImages{
+    src: string[];
+    activeIndex: number;
 }

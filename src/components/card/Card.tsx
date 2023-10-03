@@ -5,7 +5,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useMeasure from "react-use-measure";
 import { ICardProps } from "./interfaces";
 
@@ -18,13 +18,16 @@ function Card(props: ICardProps) {
   const rotateY = useTransform(mouseX, [-300, 300], [-5, 5]); // Reversed values
   const cardRotateX = useTransform(mouseY, [-300, 300], [5, -5]); // Adjusted rotation values
   const cardRotateY = useTransform(mouseX, [-300, 300], [-5, 5]); // Adjusted rotation values
+  const myRef = useRef<HTMLDivElement | null>(null);
+  const [componentWidth, setComponentWidth] = useState<number>(0);
+  const [componentHeight, setComponentHeight] = useState<number>(0);
 
   // carousel
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleMovement = (e: any) => {
-    const offsetX = e.clientX - window.innerWidth / 2;
-    const offsetY = e.clientY - window.innerHeight / 2;
+    const offsetX = e.clientX - componentWidth / 2;
+    const offsetY = e.clientY - componentHeight / 2;
 
     mouseX.set(offsetX);
     mouseY.set(offsetY);
@@ -35,6 +38,14 @@ function Card(props: ICardProps) {
     animate(mouseY, 0, { duration: 0.3 });
   };
 
+  useEffect(() => {
+    if (myRef.current != null) {
+      const boundary = myRef.current?.getBoundingClientRect();
+      setComponentWidth(boundary.width);
+      setComponentHeight(boundary.height);
+    }
+  }, []);
+
   return (
     <motion.div
       ref={props.ref}
@@ -44,7 +55,7 @@ function Card(props: ICardProps) {
           props.scaleChange && props.scaleChange.get() < 0.85
             ? 0.85
             : props.scaleChange,
-        perspective: 800,
+        perspective: props.perspective ? props.perspective : 800,
         transformStyle: "preserve-3d",
         rotateX,
         rotateY,
@@ -56,6 +67,7 @@ function Card(props: ICardProps) {
       onScroll={handleReset}
     >
       <motion.div
+        ref={myRef}
         key="card"
         style={{
           // maxWidth: props.maxWidth ? props.maxWidth : "none",
@@ -71,16 +83,22 @@ function Card(props: ICardProps) {
           padding: props.paddingX ? props.paddingX : "2.5vw",
           paddingTop: props.paddingY ? props.paddingY : "30vh",
           paddingBottom: props.paddingY ? props.paddingY : "30vh",
-          perspective: 800,
+          perspective: props.perspective ? props.perspective : 800,
           transformStyle: "preserve-3d",
           rotateX: cardRotateX,
           rotateY: cardRotateY,
+          ...props.styleProps,
         }}
         transition={{ velocity: 0, type: "spring" }}
       >
-        <motion.div style={{
-          height: "100%"
-        }}>{props.content}</motion.div>
+        <motion.div
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        >
+          {props.content}
+        </motion.div>
       </motion.div>
     </motion.div>
   );

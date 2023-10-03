@@ -4,8 +4,9 @@ function AboutBanner(){
     return(
         <motion.div
             style={{
-                height: "30em",
-                width: "100%"
+                height: "80vh",
+                width: "100%",
+                backgroundColor : "black",
             }}
         >
 

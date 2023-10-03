@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Navbar from "../../components/navbar/Navbar";
 import { motion } from "framer-motion";
 import HomeBanner from "../../components/home_banner/HomeBanner";
@@ -12,16 +12,11 @@ function Home() {
       backgroundColor: "black",
       height: "100vh",
     }}>
-      <Stack sx={{
-        top: "0"
-      }}>
-        <Navbar />
-      </Stack>
-      
+      <Navbar />
       <Stack>
         <HomeBanner/>
         <ProjectsBanner/>
-        {/* <AboutBanner/> */}
+        <AboutBanner/>
       </Stack>
     </motion.div>
   );

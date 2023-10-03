@@ -43,7 +43,7 @@ function ProjectsBanner() {
           paddingBottom: "2vw",
         }}
       >
-        <Card content={<CardContent/>} ref={ref} scaleChange={parallax} />
+        <Card content={<CardContent/>} ref={ref} scaleChange={parallax} perspective={1000}/>
       </motion.div>
     </Stack>
   );

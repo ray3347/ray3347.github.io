@@ -1,20 +1,19 @@
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import MainButton from "../main-button/MainButton";
 
 function HomeBanner() {
+  const theme = useTheme();
+  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const fullTitle = [
     "Hi, Hallo, こんにちは!",
     "I'm Ansel and I'm a Software Developer.",
     "Welcome to my personal website, feel free to play around and I hope you enjoy your stay :)",
   ];
 
-  const images = [
-    "bg-homeMe",
-    "bg-homeMe2",
-    "bg-homeMe3"
-  ]
+  const images = ["bg-homeMe", "bg-homeMe2", "bg-homeMe3"];
 
   const [activeImage, setActiveImage] = useState<string>("bg-homeMe");
   const [title, setTitle] = useState("");
@@ -42,22 +41,21 @@ function HomeBanner() {
     return () => clearInterval(typingTimer);
   };
 
-  const switchImage = () =>{
+  const switchImage = async () => {
     const interval = 1500;
     let index = 0;
 
-    setInterval(()=>{
+    setInterval(() => {
       setActiveImage(images[index]);
-      index>=2 ? index = 0 : index++;
-      
-    },interval)
-  }
+      index >= 2 ? (index = 0) : index++;
+    }, interval);
+  };
 
   useEffect(() => {
     typingAnimation(fullTitle[0], setTitle);
     setTimeout(() => {
       typingAnimation(fullTitle[1], setTitle2);
-    }, 700);   
+    }, 700);
     typingAnimation(fullTitle[2], setTitle3, 50);
     switchImage();
   }, []);
@@ -68,21 +66,21 @@ function HomeBanner() {
         maxWidth: "100%",
         height: "80vh",
         padding: "5vw",
-        paddingRight: "0px",
+        // paddingRight: "0px",
         background: "black",
-        justifyContent: "space-between",
+        justifyContent: isMdScreen ? "center" : "space-between",
         alignItems: "center",
-        flexDirection: "row",
+        flexDirection: isMdScreen ? "column-reverse" : "row",
       }}
     >
       <Stack>
         <motion.div
           style={{
-            fontSize: "5vw",
+            fontSize: isMdScreen ? "6vw" : "5vw",
             fontWeight: "bold",
             color: "white",
-            textAlign: "left",
-            justifyContent: "flex-start",
+            textAlign: isMdScreen ? "center" : "left",
+            justifyContent: isMdScreen ? "center" : "flex-start",
             maxWidth: "60vw",
           }}
         >
@@ -90,7 +88,7 @@ function HomeBanner() {
 
           <motion.div
             style={{
-              fontSize: "3vw",
+              fontSize: isMdScreen ? "4vw" : "3vw",
               fontWeight: "bold",
             }}
           >
@@ -99,7 +97,7 @@ function HomeBanner() {
 
           <motion.div
             style={{
-              fontSize: "1.2vw",
+              fontSize: isMdScreen ? "2.2vw" : "1.2vw",
               fontWeight: "bold",
               color: "#FF04D7",
               opacity: "50%",
@@ -109,18 +107,29 @@ function HomeBanner() {
           </motion.div>
         </motion.div>
       </Stack>
-      <motion.div
-        className={activeImage}
-        initial={{scale: 1.5, opacity: 0, x:0, y: -70}}
-        animate={{scale: 1.8, opacity: 1, x:-102, y:-70}}
-        transition={{delay: 1 ,duration: 0.8, bounce: 100, ease: "easeOut"}}
-        style={{
-          backgroundSize: "cover",
+      <Stack
+        sx={{
           height: "100%",
-          width: "20vw",
-          opacity: "10%",
+          width: isMdScreen ? "60vw" : "20vw",
         }}
-      ></motion.div>
+      >
+        <motion.div
+          className={activeImage}
+          initial={{ scale: 0.7, opacity: 0, x: 100, y: 0 }}
+          animate={{ scale: 1.2, opacity: 1, x: isMdScreen ? 0 : 0, y: -100 }}
+          transition={{ delay: 1, duration: 0.8, bounce: 100, ease: "easeOut" }}
+          style={{
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            opacity: "10%",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </Stack>
     </Stack>
   );
 }

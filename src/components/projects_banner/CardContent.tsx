@@ -1,16 +1,23 @@
+import { useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 
 function CardContent(){
+  const theme = useTheme();
+  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+  
     return(
         <motion.div
           style={{
             gap: "1em",
-            textAlign: "left",
+            textAlign: isMdScreen ? "center" : "left",
+            flexDirection: "column",
+            alignItems: isMdScreen ? "center" : "flex-start",
+            justifyContent: isMdScreen ? "center" : "flex-start",
           }}
         >
           <motion.div
             style={{
-              fontSize: "3vw",
+              fontSize: isMdScreen ? "5vw" : "3vw",
               fontWeight: "bold",
               color: "white",
             }}
@@ -19,11 +26,13 @@ function CardContent(){
           </motion.div>
           <motion.div
             style={{
-              fontSize: "1.5vw",
+              textAlign: "left",
+              fontSize: isMdScreen ? "3.5vw" :"1.5vw",
               fontWeight: "normal",
               color: "white",
               opacity: "0.5",
-              maxWidth: "40vw",
+              maxWidth: isMdScreen ? "70vw":"40vw",
+              margin: isMdScreen ? "auto" : "none"
             }}
           >
             Collection of my past projects in various fields such as software

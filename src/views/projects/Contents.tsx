@@ -1,33 +1,65 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import CarouselButton from "../../components/carousel_button/CarouselButton";
 import { IContentProps } from "./interfaces";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion, useAnimate } from "framer-motion";
 
 function Contents(props: IContentProps) {
+  const theme = useTheme();
+  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [index, setIndex] = useState(0);
   const dataLength = props.data.length - 1;
+  const [scope, setAnimate] = useAnimate();
 
   const [isButtonHover, setIsButtonHover] = useState(false);
 
+  const enterHandlePrevAnimation = () => {
+    setAnimate(scope.current, { opacity: 0 });
+    setAnimate("div", { opacity: 0, x: 10 });
+  };
+
+  const exitHandlePrevAnimation = () => {
+    setAnimate(scope.current, { opacity: 1 });
+    setAnimate("div", { opacity: 1, x: 0 });
+  };
+
+  const enterHandleNextAnimation = () => {
+    setAnimate(scope.current, { opacity: 0 });
+    setAnimate("div", { opacity: 0, x: -10 });
+  };
+
+  const exitHandleNextAnimation = () => {
+    setAnimate(scope.current, { opacity: 1 });
+    setAnimate("div", { opacity: 1, x: 0 });
+  };
+
   const handleNext = () => {
-    if (index + 1 <= dataLength) {
-      setIndex(index + 1);
-      props.activeIndex(index + 1);
-    } else {
-      setIndex(0);
-      props.activeIndex(0);
-    }
+    enterHandleNextAnimation();
+    setTimeout(() => {
+      if (index + 1 <= dataLength) {
+        setIndex(index + 1);
+        props.activeIndex(index + 1);
+      } else {
+        setIndex(0);
+        props.activeIndex(0);
+      }
+      exitHandleNextAnimation();
+    }, 200);
   };
 
   const handleBack = () => {
-    if (index - 1 >= 0) {
-      setIndex(index - 1);
-      props.activeIndex(index - 1);
-    } else {
-      setIndex(dataLength);
-      props.activeIndex(dataLength);
-    }
+    enterHandlePrevAnimation();
+    setTimeout(()=>{
+      if (index - 1 >= 0) {
+        setIndex(index - 1);
+        props.activeIndex(index - 1);
+      } else {
+        setIndex(dataLength);
+        props.activeIndex(dataLength);
+      }
+      exitHandlePrevAnimation();
+    },200)
+   
   };
 
   return (
@@ -51,24 +83,32 @@ function Contents(props: IContentProps) {
           fontWeight: "bold",
         }}
       >
-        <motion.div>
-          <motion.div
+        <Stack
+          ref={scope}
+          sx={{
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-around",
+            textAlign: "justify",
+          }}
+        >
+          <div
             style={{
-              fontSize: "3vw",
+              fontSize: isMdScreen ? "5vw":"3vw",
             }}
           >
             {props.data[index].title}
-          </motion.div>
-          <motion.div
+          </div>
+          <div
             style={{
-              fontSize: "1vw",
+              fontSize: isMdScreen ? "1.5vw" : "1vw",
               opacity: "0.7",
-              fontWeight: "normal"
+              fontWeight: "normal",
             }}
           >
             {props.data[index].description}
-          </motion.div>
-        </motion.div>
+          </div>
+        </Stack>
 
         <motion.div
           style={{
@@ -97,7 +137,8 @@ function Contents(props: IContentProps) {
               },
             }}
             style={{
-              width: "15vw",
+              width: isMdScreen ? "25vw" : "15vw",
+              fontSize: isMdScreen ? "3vw" : undefined,
               padding: "1.5vw",
               backgroundColor: "rgba(255,4,215,0.45)",
               // marginTop: "5vh",

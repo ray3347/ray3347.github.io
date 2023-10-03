@@ -1,4 +1,4 @@
-import { MotionValue } from "framer-motion";
+import { MotionStyle, MotionValue } from "framer-motion";
 
 export interface ICardProps{
     ref?: React.MutableRefObject<null>;
@@ -8,5 +8,6 @@ export interface ICardProps{
     paddingY?: string;
     width?: string;
     height?: string;
-    carouselControls? : any;
+    perspective?: number;
+    styleProps? : MotionStyle;
 }
