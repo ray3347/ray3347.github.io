@@ -33,10 +33,10 @@ function ProjectsBanner() {
   return (
     <Stack>
       <motion.div
-        className="bg-backgroundGlow w-full overflow-hidden bg-repeat-y"
+        className="bg-backgroundGlow"
         style={{
           backgroundSize: "cover",
-          backgroundPosition: "50% 0%",
+          backgroundPosition: "center",
           paddingLeft: "5vw",
           paddingRight: "5vw",
           paddingTop: "2vw",

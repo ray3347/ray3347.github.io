@@ -1,5 +1,5 @@
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IProjectTypes } from "./interfaces";
 import { motion } from "framer-motion";
 import Navbar from "../../components/navbar/Navbar";
@@ -14,6 +14,10 @@ function Projects() {
   const [activeData, setActiveData] = useState<number>(0);
   const [projectType, setProjectType] = useState<IProjectTypes>();
 
+  useEffect(()=>{
+    document.title = "Projects - Ansel's Website";
+  },[])
+
   return (
     <Stack
       className="bg-backgroundGlow bg-no-repeat bg-cover"
@@ -21,15 +25,9 @@ function Projects() {
         height: "100vh",
         // backgroundColor: "black",
         color: "white",
+        paddingTop: "5vh"
       }}
     >
-      <Stack
-        sx={{
-          top: "0",
-        }}
-      >
-        <Navbar />
-      </Stack>
 
       <motion.div
         style={{

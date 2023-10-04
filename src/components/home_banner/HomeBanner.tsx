@@ -116,7 +116,7 @@ function HomeBanner() {
         <motion.div
           className={activeImage}
           initial={{ scale: 0.7, opacity: 0, x: 100, y: 0 }}
-          animate={{ scale: 1.2, opacity: 1, x: isMdScreen ? 0 : 0, y: -100 }}
+          animate={{ scale: 1.2, opacity: 1, x: isMdScreen ? 0 : 0, y: -70 }}
           transition={{ delay: 1, duration: 0.8, bounce: 100, ease: "easeOut" }}
           style={{
             backgroundSize: "cover",

@@ -40,17 +40,31 @@ const routes = createBrowserRouter([
   // },
   {
     path: "/",
-    element: <Home />,
-    index: true,
+    element: <Navbar/>,
+    children: [
+      {
+        path: "home",
+        element: <Home/>,
+        index: true
+      },
+      {
+        path: "projects",
+        element: <Projects/>
+      },
+      {
+        path: "about-me",
+        element: <AboutPage/>
+      }
+    ]
   },
-  {
-    path: "/projects",
-    element: <Projects/>
-  },
-  {
-    path: "/about-me",
-    element: <AboutPage/>
-  }
+  // {
+  //   path: "/projects",
+  //   element: <Projects/>
+  // },
+  // {
+  //   path: "/about-me",
+  //   element: <AboutPage/>
+  // }
 ]);
 
 const root = ReactDOM.createRoot(
