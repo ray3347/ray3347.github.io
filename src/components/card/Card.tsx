@@ -52,8 +52,8 @@ function Card(props: ICardProps) {
       initial={{ scale: 1 }}
       style={{
         scale:
-          props.scaleChange && props.scaleChange.get() < 0.85
-            ? 0.85
+          props.scaleChange && props.scaleChange.get() < 0.7
+            ? 0.7
             : props.scaleChange,
         perspective: props.perspective ? props.perspective : 800,
         transformStyle: "preserve-3d",

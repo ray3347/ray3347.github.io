@@ -4,12 +4,14 @@ import "../../index.css";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { pageType } from "./constants";
+import { INavbarProps } from "./interfaces";
 
-function Navbar() {
+function Navbar(props: INavbarProps) {
   const [activePage, setActivePage] = useState<string>("");
   const [pageHover, setPageHover] = useState<string>("");
 
   useEffect(() => {
+    setActivePage(props.activePage)
   }, []);
 
   return (
@@ -35,7 +37,7 @@ function Navbar() {
             width: "100%",
           }}
         >
-          <Link to="/home">
+          <Link to="/">
             <motion.div
               style={{
                 gap: "0.5vh",

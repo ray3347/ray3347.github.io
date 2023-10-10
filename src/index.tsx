@@ -40,22 +40,22 @@ const routes = createBrowserRouter([
   // },
   {
     path: "/",
-    element: <Navbar/>,
+    element: <Navbar activePage="Home" />,
     children: [
       {
-        path: "home",
-        element: <Home/>,
-        index: true
+        path: "",
+        element: <Home />,
+        index: true,
       },
       {
         path: "projects",
-        element: <Projects/>
+        element: <Projects />,
       },
       {
         path: "about-me",
-        element: <AboutPage/>
-      }
-    ]
+        element: <AboutPage />,
+      },
+    ],
   },
   // {
   //   path: "/projects",

@@ -24,7 +24,7 @@ function ProjectsBanner() {
   const scroll = useScroll({
     target: ref,
   });
-  const parallax = useTransform(scroll.scrollYProgress, [1, 0], [0.85, 1]);
+  const parallax = useTransform(scroll.scrollYProgress, [1, 0], [0.7, 1]);
 
   useEffect(() => {
     // console.log(parallax);
@@ -43,7 +43,10 @@ function ProjectsBanner() {
           paddingBottom: "2vw",
         }}
       >
-        <Card content={<CardContent/>} ref={ref} scaleChange={parallax} perspective={1000}/>
+        {/* <Card content={<CardContent/>} ref={ref} scaleChange={parallax} perspective={1000}/> */}
+        <motion.div ref={ref}>
+          <CardContent/>
+        </motion.div>
       </motion.div>
     </Stack>
   );
