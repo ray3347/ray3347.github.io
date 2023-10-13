@@ -13,7 +13,6 @@ module.exports = {
         'homeMe3' : "url('/public/assets/images/home-me-3.svg')",
         'testImage' : "url('/public/assets/images/STGpow.svg')",
         'gifName' : "url('/public/assets/images/ansel-halim-stg-recede.gif')",
-        'mp4Home' : "url('/public/assets/images/ansel-stg-flash.mp4')",
       }
     },
   },
