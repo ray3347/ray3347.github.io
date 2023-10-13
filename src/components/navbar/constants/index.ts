@@ -1,5 +1,5 @@
 export const pageType={
-    homePage: "Home",
-    projectsPage: "Projects",
-    aboutPage: "About"
+    homePage: "Ansel's Website",
+    projectsPage: "Projects - Ansel's Website",
+    aboutPage: "About Me - Ansel's Website"
 }

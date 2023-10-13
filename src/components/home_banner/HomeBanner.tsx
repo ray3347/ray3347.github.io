@@ -2,6 +2,7 @@ import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import MainButton from "../main-button/MainButton";
+import loop from "../../assets/videos/ansel-stg-flash.mp4";
 
 function HomeBanner() {
   const theme = useTheme();
@@ -60,75 +61,108 @@ function HomeBanner() {
     switchImage();
   }, []);
   return (
-    <Stack
-      sx={{
-        width: "100%",
-        maxWidth: "100%",
-        height: "80vh",
-        padding: "5vw",
-        // paddingRight: "0px",
-        background: "black",
-        justifyContent: isMdScreen ? "center" : "space-between",
-        alignItems: "center",
-        flexDirection: isMdScreen ? "column-reverse" : "row",
-      }}
-    >
-      <Stack>
-        <motion.div
-          style={{
-            fontSize: isMdScreen ? "6vw" : "5vw",
-            fontWeight: "bold",
-            color: "white",
-            textAlign: isMdScreen ? "center" : "left",
-            justifyContent: isMdScreen ? "center" : "flex-start",
-            maxWidth: "60vw",
-          }}
-        >
-          <motion.div>{title}</motion.div>
-
-          <motion.div
-            style={{
-              fontSize: isMdScreen ? "4vw" : "3vw",
-              fontWeight: "bold",
-            }}
-          >
-            {title2}
-          </motion.div>
-
-          <motion.div
-            style={{
-              fontSize: isMdScreen ? "2.2vw" : "1.2vw",
-              fontWeight: "bold",
-              color: "#FF04D7",
-              opacity: "50%",
-            }}
-          >
-            {title3}
-          </motion.div>
-        </motion.div>
-      </Stack>
+    <Stack>
       <Stack
         sx={{
-          height: "100%",
-          width: isMdScreen ? "60vw" : "20vw",
+          position: "absolute",
+          top: "0",
+          // bottom: "0",
+          left: "0",
+          right: "0",
+          width: "100%",
+          height: "80vh",
+          objectFit: "cover",
+          objectPosition: "center",
+          overflow: "hidden"
         }}
       >
-        <motion.div
-          className={activeImage}
-          initial={{ scale: 0.7, opacity: 0, x: 100, y: 0 }}
-          animate={{ scale: 1.2, opacity: 1, x: isMdScreen ? 0 : 0, y: -70 }}
-          transition={{ delay: 1, duration: 0.8, bounce: 100, ease: "easeOut" }}
-          style={{
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            opacity: "10%",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
+        <video src={loop} muted autoPlay loop style={{
+           width: "auto",
+           height: "auto",
+           minWidth: "100%",
+           minHeight: "100%",
+           scale: isMdScreen ? "3" : undefined
+        }}></video>
+      </Stack>
+      <Stack
+        className="bg-mp4Home"
+        sx={{
+          width: "100%",
+          maxWidth: "100%",
+          height: "80vh",
+          padding: "5vw",
+          // paddingRight: "0px",
+          // background: "black",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          justifyContent: isMdScreen ? "center" : "space-between",
+          alignItems: "center",
+          flexDirection: isMdScreen ? "column-reverse" : "row",
+        }}
+      >
+        <Stack>
+          <motion.div
+            style={{
+              fontSize: isMdScreen ? "6vw" : "5vw",
+              fontWeight: "bold",
+              color: "white",
+              textAlign: isMdScreen ? "center" : "left",
+              justifyContent: isMdScreen ? "center" : "flex-start",
+              maxWidth: "60vw",
+              zIndex: "3",
+            }}
+          >
+            <motion.div>{title}</motion.div>
+
+            <motion.div
+              style={{
+                fontSize: isMdScreen ? "4vw" : "3vw",
+                fontWeight: "bold",
+              }}
+            >
+              {title2}
+            </motion.div>
+
+            <motion.div
+              style={{
+                fontSize: isMdScreen ? "2.2vw" : "1.2vw",
+                fontWeight: "bold",
+                // color: "#FF04D7",
+                // opacity: "50%",
+              }}
+            >
+              {title3}
+            </motion.div>
+          </motion.div>
+        </Stack>
+        <Stack
+          sx={{
             height: "100%",
+            width: isMdScreen ? "60vw" : "20vw",
           }}
-        />
+        >
+          <motion.div
+            className={activeImage}
+            initial={{ scale: 0.7, opacity: 0, x: 100, y: 0 }}
+            animate={{ scale: 1.2, opacity: 1, x: isMdScreen ? 0 : 0, y: -70 }}
+            transition={{
+              delay: 1,
+              duration: 0.8,
+              bounce: 100,
+              ease: "easeOut",
+            }}
+            style={{
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              opacity: "10%",
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        </Stack>
       </Stack>
     </Stack>
   );

@@ -40,7 +40,7 @@ const routes = createBrowserRouter([
   // },
   {
     path: "/",
-    element: <Navbar activePage="Home" />,
+    element: <Navbar />,
     children: [
       {
         path: "",

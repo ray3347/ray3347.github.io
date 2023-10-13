@@ -4,14 +4,13 @@ import "../../index.css";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { pageType } from "./constants";
-import { INavbarProps } from "./interfaces";
 
-function Navbar(props: INavbarProps) {
+function Navbar() {
   const [activePage, setActivePage] = useState<string>("");
   const [pageHover, setPageHover] = useState<string>("");
 
   useEffect(() => {
-    setActivePage(props.activePage)
+    setActivePage(document.title)
   }, []);
 
   return (
